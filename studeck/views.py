@@ -172,15 +172,28 @@ def menu_rating(request):
         rating_int = request.POST.get("rating")
 
         try:
-            rating_data = rating_model.objects.get(user_name = request.user.username, food_item = food)
+            studentuser = student_info.objects.get(user_name = request.user.username)
         except:
+            new_info = student_info(user_name = request.user.username)
+            new_info.save()
+            studentuser = student_info(user_name = request.user.username)
+
+        try:
+            fooditem = food_items.objects.get(food_item = food)
+        except:
+            newfood = food_items(food_item = food)
+            newfood.save()
+            fooditem = food_items.objects.get(food_item = food)
+
+        rating_data = rating_model.objects.filter(user_name = studentuser, food_item = fooditem).first()
+        if not rating_data:
             rating_data = None
         try:
             rating_data.rating = rating_int
             rating_data.save()
             messages.success(request,"Rating updated")
         except:
-            data = rating_model(user_name = request.user.username, food_item = food, rating = rating_int)
+            data = rating_model(user_name = studentuser, food_item = fooditem, rating = rating_int)
             data.save()
             messages.success(request,"Rating submited")
         food_total = food_items.objects.filter(food_item = food).first()
@@ -216,11 +229,17 @@ def menu_rating(request):
 def feedback(request):
     if request.method == 'POST':
         form = Feedback_form(request.POST, request.FILES)
+        try:
+            studentinfo = student_info.objects.get(user_name = request.user.username)
+        except:
+            new_user = student_info(user_name = request.user.username)
+            new_user.save()
+            studentinfo = student_info.objects.get(user_name = request.user.username)
+
         if form.is_valid():
-            u_name = request.user.username
             fback = form.cleaned_data['feed_back']
             pic = form.cleaned_data['picture']
-            data = Feedbacks(user_name = u_name,feed_back = fback,picture = pic)
+            data = Feedbacks(user_name = studentinfo,feed_back = fback,picture = pic)
             data.save()
             return HttpResponse('You feedback have been submited')
     else:

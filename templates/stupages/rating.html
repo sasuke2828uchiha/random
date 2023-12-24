@@ -1,11 +1,11 @@
 {%if user.is_authenticated %}
-<html style="background-color:rgba(247, 196, 102, 0.893)">
+<html style="background-color:rgb(20, 19, 19); color:white">
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
    
     .button-1 {
-  background-color: rgba(0, 0, 255, 0.931);
+  background-color: rgba(67, 197, 230, 0.768);
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
@@ -33,7 +33,7 @@
 
 .button-1:hover,
 .button-1:focus {
-  background-color: rgba(0, 0, 255, 0.709);
+  background-color: rgba(57, 168, 196, 0.768);
 }
   .rate > input { 
     display: none;
@@ -85,7 +85,7 @@
 <div class="container">
 
 <div class="avg-rating"> 
-<table class="ratingtable" border="1px">
+<table class="ratingtable" border="2px", style="border: 1px solid rgb(55, 185, 228);">
   <tr>
     <th>Food item</th>
     <th>Average rating</th>
@@ -124,7 +124,7 @@
   <br><br>
   <button class="button-1" type="submit">submit</button>
   {% if messages %}
-<ul style="color: blue; font-size: 30px;" class="messages">
+<ul style="color: rgb(0, 255, 8); font-size: 30px;" class="messages">
     {% for message in messages %}
         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
@@ -132,10 +132,7 @@
 {% endif %}
 </form>
 </div>
-
 {%endif%}
-
-
 </div>
 <script>
   document.getElementById('fooditems').addEventListener('change', function() {

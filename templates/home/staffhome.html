@@ -15,7 +15,7 @@
     margin-top:20px;
     color: #1a202c;
     text-align: left;
-    background-color: #e2e8f0;    
+    background-color: #454b53;    
 }
 .main-body {
     padding: 15px;
@@ -30,26 +30,18 @@
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: #1c1c1c;
     background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
+    border: 1px dotted   rgba(255, 255, 255, 0.649);
     border-radius: .25rem;
+    color:white
 }
-.attendance_container{
-    
-    max-width: 300px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-.card-body {    
+
+.card-body {
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1rem;
 }
-
 .gutters-sm {
     margin-right: -8px;
     margin-left: -8px;
@@ -69,16 +61,20 @@
 .h-100 {
     height: 100%!important;
 }
+
+hr{
+    border-top: 1px solid white;
+}
 .shadow-none {
     box-shadow: none!important;
 }
+
 .form-container {
         max-width: 300px;
         margin: auto;
         padding: 20px;
-        border: 1px solid #ccc;
         border-radius: 5px;
-        background-color: #f9f9f9;
+        background-color: #1c1c1c;
     }
 
     .form-container input[type="file"] {
@@ -195,13 +191,11 @@
     <a class="btn btn-info " target="__blank" href="bill">view bills</a>
     <a class="btn btn-info " target="__blank" href="feedback_view">view feedbacks</a>
     <a class="btn btn-info " target="__blank" href="{% url 'rating' %}">view ratings</a>
-
-
 </div>
 </div>
 
 </div>
-<table border="1">
+<table border="1"; style="color: white;">
     <thead>
 <h2>Attendance in past five days</h2>
         <tr>
