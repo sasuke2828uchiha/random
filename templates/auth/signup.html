@@ -1,0 +1,35 @@
+
+<form action="" method="post">
+    {% csrf_token %} 
+    <h3>Signup Here</h3>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="" name="username" id="username">
+    <br>
+    <label for="first_name">First name</label>
+    <input type="text" placeholder="" name="first_name" id="first_name">
+    <br>
+    <label for="last_name">Last name</label>
+    <input type="text" placeholder="" name="last_name" id="last_name">
+    <br>
+    <label for="email">Email</label>
+    <input type="email" placeholder="" name="email" id="email">
+    <br>
+    <label for="staff_id">ID</label>
+    <input type="number" placeholder="" name="staff_id" id="staff_id">
+    <br>
+    <label for="mess_name">mess name</label>
+    <input type="text" placeholder="" name="mess_name" id="mess_name">
+    <br>
+    <label for="password1">Password</label>
+    <input type="password" placeholder="" id="password1" name="password1">
+    <br>
+    <label for="password2">Confrom Password</label>
+    <input type="password" placeholder="" id="password2" name="password2">
+    <br>
+    <button type="submit">Signup</button>
+    <br>
+    <a href="{% url 'login_u' %}" >i have already account</a>
+</form>
+
+

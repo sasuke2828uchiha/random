@@ -1,0 +1,53 @@
+<html style="background-color: black    ;">
+<div class="container">
+{% if menu_data %}
+{% for date, data in menu_data.items %}
+  <div class="date-block"  padding: 10px; margin-bottom: 10px;">
+    <h3>Date: {{ date }}</h3>
+        <table border="2px" style="background-color: rgb(44, 42, 42);
+        color: white; border: 2px solid rgb(55, 185, 228);">
+           <tr>
+        <th>meal</th>
+         <th>Food</th>
+        </tr>
+            {% for time, food_list in data.items %}
+        <tr>
+         <td>{{ time }}</td>
+        <td>
+          <ul>
+         {% for food in food_list %}
+            <li>{{ food }}</li>
+        {% endfor %}
+        </ul>
+        </td>
+        </tr>
+        {% endfor %}
+        </table>
+  </div>
+{% endfor %}
+{%else%}
+ <h1> No menu available </h1>
+ {%endif%}
+ </div>
+<style>
+
+    .container{
+        margin-left: 10px;
+        background-color:rgba(27, 27, 27, 0.893)
+    }
+    .date-block {
+        display:grid;
+        margin: 20px;
+        vertical-align: top; 
+        margin-right: 20px;
+        font-size: 30px;
+        color: white;
+    }
+    ul {
+        font-size: 15;
+        margin-top: 0;
+    }
+ </style>
+
+
+</html>

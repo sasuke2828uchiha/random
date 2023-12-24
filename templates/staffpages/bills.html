@@ -1,0 +1,98 @@
+{%load socialaccount %}
+{% get_social_accounts user as accounts %}
+{% if not accounts %} 
+{%if user.is_authenticated %}
+<html style="background-color:rgba(247, 196, 102, 0.893)">
+
+<head>
+    <title>student Bills Table</title>
+</head>
+<body>
+
+    
+    <a class="button-1" href="{% url 'user_bills' %}" download>Download csv</a>
+
+    <div class="container">
+    <table class="billtable" border="1px" >
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Total Bill</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for username, totalbill in bill.items %}
+            <tr>
+                <td>{{ username }}</td>
+                <td>{{ totalbill }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>    
+
+</body>
+</html>
+<style>
+    .billtable{
+        font-size: 20px;
+        background-color: rgb(44, 42, 42);
+        color: white;
+       
+    }
+    .container{
+        display: grid;
+        margin: 100px;
+        margin-top:40;
+    }
+    .button{
+        size: 100px;
+    }
+    .button-1 {
+  background-color: rgba(0, 0, 255, 0.931);
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-1:hover,
+.button-1:focus {
+  background-color: rgba(0, 0, 255, 0.709);
+}
+</style>
+{%else%}
+<script>
+    window.location.href = "{% url 'home' %}";
+  </script>
+
+{%endif%}
+{%else%}
+<script>
+    window.location.href = "{% url 'home' %}";
+  </script>
+{%endif%}
+
+
+
+
+

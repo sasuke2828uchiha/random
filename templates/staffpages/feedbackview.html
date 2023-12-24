@@ -1,0 +1,45 @@
+{%load socialaccount %}
+{% get_social_accounts user as accounts %}
+{% if not accounts %} 
+{%if user.is_authenticated %}
+<html style="background-color:rgba(247, 196, 102, 0.893)">
+<title>feedback view  </title>
+ <style>
+.date-block{
+  border: 1px solid #000; padding: 10px; margin-bottom: 10px;
+  background-color: rgb(44, 42, 42);
+  color: white;
+}
+ </style>
+{% if data %}
+  {% for feedbacks in data %}
+    <div class="date-block" >
+      <h3>User: {{ feedbacks.user_name }}</h3>
+      <ul>
+        <p>FEEDBACK: {{ feedbacks.feed_back }}</p>
+        {% if feedbacks.picture and feedbacks.picture.url %}
+        <a target="__blank" style="color:lightblue" href="{{feedbacks.picture.url}}">view image</a>
+       {% endif %}
+         <br>
+      </ul>
+    </div>
+  {% endfor %}
+{% else %}
+  <h1> No Feedbacks </h1>
+{% endif %}
+
+
+</html> 
+
+
+{%else%}
+<script>
+    window.location.href = "{% url 'home' %}";
+  </script>
+
+{%endif%}
+{%else%}
+<script>
+    window.location.href = "{% url 'home' %}";
+  </script>
+{%endif%}
