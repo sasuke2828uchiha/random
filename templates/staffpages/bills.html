@@ -2,7 +2,7 @@
 {% get_social_accounts user as accounts %}
 {% if not accounts %} 
 {%if user.is_authenticated %}
-<html style="background-color:rgba(247, 196, 102, 0.893)">
+<html style="background-color:rgb(20, 19, 19); color:white">
 
 <head>
     <title>student Bills Table</title>
@@ -13,7 +13,7 @@
     <a class="button-1" href="{% url 'user_bills' %}" download>Download csv</a>
 
     <div class="container">
-    <table class="billtable" border="1px" >
+    <table class="billtable" border="2px" , style="border: 1px solid rgb(55, 185, 228);"  >
         <thead>
             <tr>
                 <th>Username</th>
@@ -36,7 +36,7 @@
 <style>
     .billtable{
         font-size: 20px;
-        background-color: rgb(44, 42, 42);
+        background-color:  #1c1c1c;
         color: white;
        
     }

@@ -7,7 +7,8 @@ class student_info(models.Model):
     student_bhawan = models.CharField(max_length=20)
     student_id = models.CharField(max_length=20)
     email = models.CharField(max_length=100)
-
+    def __str__(self):
+        return self.user_name.username
     
 class Feedbacks(models.Model):
     user_name = models.ForeignKey(student_info,on_delete = models.CASCADE)
