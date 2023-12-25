@@ -9,6 +9,7 @@ from .forms import Feedback_form
 import pandas as pd
 import json
 from staffdeck.models import staff_info
+from django.contrib.auth.models import User
 
 def stulogin(request):
     staff_members_list = []
@@ -23,10 +24,11 @@ def log_out(request):
 
 def stuhome(request):
     user = request.user
+    name = User.objects.get(username = request.user.username)
     try:
-        info = student_info.objects.get(user_name = request.user.username)
+        info = student_info.objects.get(user_name = name)
     except:
-        info = student_info(user_name = request.user.username)
+        info = student_info(user_name = name)
         info.save()
     try:
         google_account = user.socialaccount_set.get(provider='google')
@@ -63,9 +65,9 @@ def stuhome(request):
     except:
         menu_data = {}
         next_data = {}
-         
+
     try:
-        studentdata = student_info.objects.filter(user_name = request.user.username).first()
+        studentdata = student_info.objects.filter(user_name = name).first()
         stubhawan = studentdata.student_bhawan
         stuid = studentdata.student_id
     except:
@@ -81,13 +83,15 @@ def inc_attendance(request):
         new_date = total_daily(date = datetime.now().date())
         new_date.save()
         date_data = total_daily.objects.filter(date = datetime.now().date()).first()
+    
+    name = User.objects.get(username = request.user.username)
 
    
-    student = student_info.objects.get(user_name = request.user.username)
+    student = student_info.objects.get(user_name = name)
     if not student:
-        new_stu = student_info(user_name = request.user.username)
+        new_stu = student_info(user_name = name)
         new_stu.save()
-        student = student_info.objects.get(user_name = request.user.username)
+        student = student_info.objects.get(user_name = name)
 
     
     user = user_total.objects.filter(user_name = student).first()
@@ -170,13 +174,14 @@ def menu_rating(request):
     if request.method == "POST":
         food = request.POST.get('selected_item')
         rating_int = request.POST.get("rating")
+        name = User.objects.get(username = request.user.username)
 
         try:
-            studentuser = student_info.objects.get(user_name = request.user.username)
+            studentuser = student_info.objects.get(user_name = name)
         except:
-            new_info = student_info(user_name = request.user.username)
+            new_info = student_info(user_name = name)
             new_info.save()
-            studentuser = student_info(user_name = request.user.username)
+            studentuser = student_info(user_name = name)
 
         try:
             fooditem = food_items.objects.get(food_item = food)
@@ -229,12 +234,14 @@ def menu_rating(request):
 def feedback(request):
     if request.method == 'POST':
         form = Feedback_form(request.POST, request.FILES)
+        name = User.objects.get(username = request.user.username)
+
         try:
-            studentinfo = student_info.objects.get(user_name = request.user.username)
+            studentinfo = student_info.objects.get(user_name =name)
         except:
-            new_user = student_info(user_name = request.user.username)
+            new_user = student_info(user_name = name)
             new_user.save()
-            studentinfo = student_info.objects.get(user_name = request.user.username)
+            studentinfo = student_info.objects.get(user_name = name)
 
         if form.is_valid():
             fback = form.cleaned_data['feed_back']
@@ -253,15 +260,17 @@ def student_data(request):
     if request.method == "POST":
         stu_bhawan = request.POST.get("bhawan")
         id = request.POST.get("stu_id")
+        name = User.objects.get(username = request.user.username)
+
         try:
-            studentdata = student_info.objects.filter(user_name = request.user.username).first()
+            studentdata = student_info.objects.filter(user_name = name).first()
             studentdata.student_bhawan = stu_bhawan
             studentdata.student_id = id
             studentdata.save()
             return redirect("stuhome")
 
         except: 
-            data = student_info(user_name = request.user.username, student_bhawan = stu_bhawan,student_id = id, email=request.user.email)
+            data = student_info(user_name = name, student_bhawan = stu_bhawan,student_id = id, email=request.user.email)
             data.save()
             return redirect("stuhome")
 

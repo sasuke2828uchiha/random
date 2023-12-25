@@ -1,12 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User  
+
 
 class student_info(models.Model):
-    user_name = models.CharField(max_length=100)
+    user_name = models.ForeignKey(User, on_delete = models.CASCADE)
     student_bhawan = models.CharField(max_length=20)
     student_id = models.CharField(max_length=20)
     email = models.CharField(max_length=100)
-    def __str__(self):
-        return self.user_name
+
     
 class Feedbacks(models.Model):
     user_name = models.ForeignKey(student_info,on_delete = models.CASCADE)
